@@ -1,12 +1,35 @@
 # Alias for an remote type as return in an async functions is buggy
 
+## Issue
+
+The Kotlin bindings fail to compile for this example
+
+```rust
+use core::Example;
+
+uniffi::setup_scaffolding!();
+
+// Setup the type alias
+mod uniffi_setup {
+    type InternalExample = core::Example;
+    type ExternalExample = types::ExternalExample;
+    uniffi::custom_type!(InternalExample, ExternalExample, { remote });
+}
+
+// Use the alias as the return value in an async method
+#[uniffi::export]
+pub async fn example() -> Example {
+    Example { value: 0 }
+}
+```
+
 ## Rust Setup
 
 - `types` (uniffi)
-    - Define the rust type `ExternalExample` with uniffi as alias type
+    - Define the rust type `ExternalExample` with uniffi
 - `core` (rust only)
     - Define the rust only type `Example`, which is used in the code
-    - Define the `Into` and `From` for `Example` and `ExternalExample`
+    - Define the `Into` and `From` between `Example` and `ExternalExample`
 - `consumer` (uniffi)
     - Define the custom type for Kotlin `ExternalExample` and rust `Example`
     - Define uniffi method `async example() -> Example`
@@ -25,7 +48,7 @@ but 'uniffi.types.RustBuffer.ByValue' was expected.
 
 ## Why this setup
 
-Only types and consumer must be uniffi, the real logic can be split into multiple rust crates
+Only types and consumer crates must be uniffi, the real logic can be split into multiple rust crates
 
 ## Ideas
 
