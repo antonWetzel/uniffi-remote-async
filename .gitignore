@@ -1,1 +1,5 @@
-/target
+node_modules
+**/target
+rust_modules
+/src
+out

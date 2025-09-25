@@ -1,0 +1,12 @@
+{
+  "name": "react-native-my-rust-lib",
+  "version": "0.1.0",
+  "description": "temp",
+  "repository": {
+    "type": "git",
+    "url": "git+https://temp.com.git"
+  },
+  "dependencies": {
+    "uniffi-bindgen-react-native": "^0.29.3-1"
+  }
+}
