@@ -2,5 +2,3 @@
 rust:
   directory: .
   manifestPath: rust_example/Cargo.toml
-web:
-  ts: src

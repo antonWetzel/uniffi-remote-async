@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Jern Verden</title>
+    <title>Main</title>
     <style>
         * {
             padding: 0;
@@ -30,40 +30,9 @@
 </head>
 
 <body id="wasm-example">
-    <canvas id="canvas-sky-scene"></canvas>
-    <canvas id="canvas-weather-radar"></canvas>
     <script type="module">
-        import { uniffiInitAsync, Calculator, SafeAddition } from "./bundle.js";
-
-        uniffiInitAsync().then(() => {
-            // A Rust object
-            const calculator = new Calculator();
-            // A Rust object implementing the Rust trait BinaryOperator
-            const addOp = new SafeAddition();
-
-            // A Typescript class, implementing BinaryOperator
-            class SafeMultiply {
-                perform(lhs, rhs) {
-                    return lhs * rhs;
-                }
-            }
-            const multOp = new SafeMultiply();
-
-            // bigints
-            const three = 3n;
-            const seven = 7n;
-
-            // Perform the calculation, and to get an object
-            // representing the computation result.
-            const computation = calculator
-                .calculate(addOp, three, three)
-                .calculateMore(multOp, seven)
-                .lastResult();
-
-            // Unpack the bigint value into a string.
-            const result = computation.value.toString();
-            console.log(result, "=", (3 + 3) * 7);
-        });
+        import { run } from "./bundle.js";
+        run()
     </script>
 </body>
 

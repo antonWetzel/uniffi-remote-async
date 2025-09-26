@@ -1,5 +1,6 @@
 node_modules
 **/target
 rust_modules
-/src
+src/generated
+srs/bindings.ts
 out
